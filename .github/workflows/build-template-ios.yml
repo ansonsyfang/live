@@ -40,6 +40,17 @@ jobs:
         working-directory: ./react-native-template-pytorch-live/template/ios
     steps:
       - uses: actions/checkout@v2
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - name: Restore node_modules from cache
+        uses: actions/cache@v2
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
       - name: Install node_modules for react-native-pytorch-core
         run: yarn install --frozen-lockfile
         working-directory: ./react-native-pytorch-core
