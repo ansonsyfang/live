@@ -42,10 +42,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Install node_modules for react-native-pytorch-core
-        run: yarn install --frozen-lockfile
+        run: yarn install --force
         working-directory: ./react-native-pytorch-core
       - name: Install node_modules for template
-        run: yarn install --frozen-lockfile
+        run: yarn install --force
       - name: Setup Ruby (bundle)
         uses: ruby/setup-ruby@v1
         with:
